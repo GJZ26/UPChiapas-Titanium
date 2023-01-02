@@ -2,9 +2,13 @@
     "application_version":"0.0.1-dev",
     "default_port":3000,
 
-    "internal_resource_route":"server-files",
-    "internal_resource_folder":"resources",
+    "internal_resources_route":"server-files",
+    "internal_resources_folder":"resources",
 
     "external_resources_route":"content",
-    "external_resources_folder":"public"
+    "external_resources_folder":"public",
+
+    "database_name":"titanium",
+    "database_host":"localhost",
+    "database_port":3306
 }

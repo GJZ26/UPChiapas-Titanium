@@ -15,8 +15,8 @@ const app = express();
 const port = config.default_port
 const version = config.application_version
 
-const internalRoute = config.internal_resource_route
-const internalFolder = config.internal_resource_folder
+const internalRoute = config.internal_resources_route
+const internalFolder = config.internal_resources_folder
 
 const externalRoute = config.external_resources_route
 const externalFolder = config.external_resources_folder
@@ -29,8 +29,8 @@ app.use(`/${internalRoute}`, express.static(internalFolder))
 app.use(`/${externalRoute}`, express.static(externalFolder))
 
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
 console.log(std_bold, std_yellow,"\tTitanium Console", std_reset, `v${version}`)
-    console.log(`Servidor a la escucha en el puerto ${port}
-    `,std_blue,`http://localhost:${port}/`)
+    console.log(`Servidor a la escucha en el puerto ${server.address().port}
+    `,std_blue,`http://localhost:${server.address().port}/`)
 })
