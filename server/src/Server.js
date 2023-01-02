@@ -2,6 +2,12 @@ import express from 'express'
 import DocRouter from './routes/DocRouter.js';
 import config from './server-config.json' assert {type: 'json'}
 
+// Console Styles
+const std_bold = "\x1b[1m"
+const std_yellow = "\x1b[33m"
+const std_reset = "\x1b[0m"
+const std_blue = "\x1b[34m"
+
 // Aplicativo
 const app = express();
 
@@ -24,7 +30,7 @@ app.use(`/${externalRoute}`, express.static(externalFolder))
 
 
 app.listen(port, () => {
-console.log("\x1b[1m","\x1b[33m","\tTitanium Console","\x1b[0m", `v${version}`)
+console.log(std_bold, std_yellow,"\tTitanium Console", std_reset, `v${version}`)
     console.log(`Servidor a la escucha en el puerto ${port}
-    `,"\x1b[34m",`http://localhost:${port}/`)
+    `,std_blue,`http://localhost:${port}/`)
 })
