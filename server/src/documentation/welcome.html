@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido</title>
+    <link rel="stylesheet" href="/internal/stylesheets/home.css">
+</head>
+
+<body>
+    <p>Bienvenidos a la API de</p>
+    <h1>UP Titanium</h1>
+    <p id="v">0.0.0</p>
+    <div>
+        <p>¡Enhorabuena! El servidor está a la escucha...</p>
+    </div>
+    <div>
+        Puedes verificar que los demás componentes estén funcionando correctamente o salta directamente a la <a href="/doc">documentación</a>.
+        <ul>
+            <li><a href="/internal/sample.txt">Carpetas internas</a></li>
+            <li><a href="/content/sample.txt">Carpetas externas</a></li>
+        </ul>
+    </div>
+</body>
+
+<script>
+    var a = document.getElementById('v')
+    fetch('/doc/version').then(response => response.json()).then(data => a.textContent=`v${data.version}`);
+</script>
+
+</html>
