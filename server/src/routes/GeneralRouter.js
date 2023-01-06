@@ -1,8 +1,8 @@
 import express from 'express'
 import { home } from '../services/GeneralServices.js';
 
-const GeneralRoutes = express.Router();
+const GeneralRouter = express.Router();
 
-GeneralRoutes.get("/",home)
+GeneralRouter.get("/",home)
 
-export default GeneralRoutes;
+export default GeneralRouter;

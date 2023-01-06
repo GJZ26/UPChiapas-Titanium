@@ -1,10 +1,15 @@
 import express from 'express'
 import DocRouter from './routes/DocRouter.js';
 import config from './server-config.json' assert {type: 'json'}
-import GeneralRoutes from './routes/GeneralRouter.js';
-import StudentRoutes from './routes/StudentRouter.js';
 import { log } from './utilities/BeautyLogs.js';
 import favicon from 'serve-favicon'
+import CareerRouter from './routes/CareerRouter.js';
+import GroupRouter from './routes/GroupRouter.js';
+import RootRouter from './routes/RootRouter.js';
+import SubjectRouter from './routes/SubjectRouter.js';
+import TeacherRouter from './routes/TeacherRouter.js';
+import GeneralRouter from './routes/GeneralRouter.js';
+import StudentRouter from './routes/StudentRouter.js';
 
 // Aplicativo
 const app = express();
@@ -23,9 +28,14 @@ const externalFolder = config.external_resources_folder
 app.use(favicon(`${process.cwd()}/src/resources/images/favicon.jpg`))
 
 // Enrutadores
-app.use("/",GeneralRoutes)
+app.use("/",GeneralRouter)
 app.use("/doc",DocRouter)
-app.use("/students", StudentRoutes)
+app.use("/career",CareerRouter)
+app.use("/group",GroupRouter)
+app.use("/admin",RootRouter)
+app.use("/student",StudentRouter)
+app.use("/subject",SubjectRouter)
+app.use("/teacher",TeacherRouter)
 
 // Accesos públicos
 app.use(`/${internalRoute}`, express.static(`src/${internalFolder}`))
