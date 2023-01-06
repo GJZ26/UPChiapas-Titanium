@@ -1,0 +1,139 @@
+<link rel="stylesheet" href="/internal/stylesheets/readme.css">
+<div class="content">
+    <h1 id="up-titanium-server">Up Titanium - Server</h1>
+    <!-- 
+Si concideran pertinente y necesario, actualicen y corrijan este documento :)
+ -->
+    <p><strong>Documentación para la versión</strong> ^0.0.1-dev</p>
+    <p>Bienvenido al Server Side de <strong>Titanium</strong>.</p>
+    <p>Antes de comenzar, configura tus variables de entorno, aprende cómo hacerlo <a href="#env">aquí</a>.</p>
+    <p>Para ejecutar el proyecto, abra su terminal, asegurate de estar en la carpeta <code>/server</code> (al mismo
+        nivel de
+        este archivo).</p>
+    <p>Puedes verificar esto con el comando <code>pwd</code>.</p>
+    <p>Instala las dependencias necesarias con <code>npm install</code>.</p>
+    <p>Ejecute <code>npm start</code> para levantar el servidor o <code>npm run dev</code> para arrancar el mismo
+        servidor
+        con nodemon.</p>
+    <p>En caso de no tener instalado nodemon, ejecute <code>npm install -g nodemon</code></p>
+    <h2 id="contenido">Contenido</h2>
+    <ol>
+        <li><a href="#directorios">Directorios</a>
+            <ol>
+                <li><a href="#connections">Connections</a></li>
+                <li><a href="#models">Models</a></li>
+                <li><a href="#public">Public</a></li>
+                <li><a href="#resources">Resources</a></li>
+                <li><a href="#routes">Routes</a></li>
+                <li><a href="#services">Services</a></li>
+            </ol>
+        </li>
+        <li><a href="#archivos">Archivos</a>
+            <ol>
+                <li><a href="#serverjs">Server.js</a></li>
+                <li><a href="#env">.env</a></li>
+                <li><a href="#server-configjson">Server-config.json</a></li>
+            </ol>
+        </li>
+    </ol>
+    <h2 id="directorios">Directorios</h2>
+    <p>Los directorios están distribuidos de la siguiente forma para su mejor escalabilidad, mantenimiento y depuración.
+    </p>
+    <p>En esta sección te describiremos qué almacena cada directorio.</p>
+    <h3 id="connections-">Connections/</h3>
+    <p>Guarga el script que hacen conexión a la base datos especificada en el <a href="#server-configjson">archivo de
+            configuración</a>.</p>
+    <h3 id="models-">Models/</h3>
+    <p>Contiene los scripts que definen las entidades que se almacenarán en la base de datos.</p>
+    <h3 id="public-">Public/</h3>
+    <p>En este directorio se almacenará la información pública de los usuarios o contenidos multimedia. </p>
+    <p>Los archivos de este directorio se puede acceder a través de la ruta <code>http://localhost:port/content/</code>
+        desde cualquier cliente.</p>
+    <p>Se puede cambiar el nombre de la carpeta que se desea hacer pública y la ruta de acceso desde el <a
+            href="#server-configjson">archivo de configuración</a> con la opción <code>external_resources_route</code>
+        y/o
+        <code>external_resources_path</code>.
+    </p>
+    <h3 id="resources-">Resources/</h3>
+    <p>En este directorio se almacenan contenido que se usará dentro del servidor, como hoja de estilos, scripts,
+        iconos,
+        etcétera.</p>
+    <p>Se podrá acceder mediante la ruta <code>http://localhost:port/server-files/</code> y al igual que el directorio
+        <a href="#public">public/</a>, se puede cambiar el nombre de la carpeta que se desea hacer pública y la ruta de
+        acceso desde el <a href="#server-configjson">archivo de configuración</a> con la opción
+        <code>internal_resources_route</code> y/o <code>internal_resources_path</code>.
+    </p>
+    <h3 id="routes-">Routes/</h3>
+    <p>En esta carpeta se hallan los scripts que definen las rutas que tendrán los <a href="#services">servicios</a>.
+    </p>
+    <h3 id="services-">Services/</h3>
+    <p>En este directiorios viven los scripts que tratan y sirven la información consultada.</p>
+    <h2 id="archivos">Archivos</h2>
+    <p>La mayor parte de los scripts poseen documentación para explicar qué hacen y cómo usarlos. </p>
+    <p>Sin embargo hay archivos adicionales que son igual importantes y se deben dar una descripción de su funcionamento
+        más
+        detallado.</p>
+    <h3 id="server-js">Server.js</h3>
+    <p>Este es el archivo principal del servidor, importa los enrutadores, inicializa el servidor y lo configura de
+        acuerdo
+        a tu preferencia. Por sentido común, <strong>NINGÚN</strong> parche debería aplicarse acá.</p>
+    <h3 id="-env">.env</h3>
+    <p>Los archivos <strong>.env</strong> son usados para definir variables de entorno del servidor, por defecto (y por
+        seguridad) no se indexan en git.</p>
+    <p>Este archivo se localiza en la ruta raíz del proyecto del server (al mismo nivel de este README), y en este
+        proyecto,
+        almacena las credenciales de tu base de datos.</p>
+    <p>El archivo <strong>.env</strong> deberá tener el siguiente contenido:</p>
+    <pre><code><span class="hljs-attr">USER_DB</span>=<span class="hljs-string">"Usuario de tu base de datos"</span>
+<span class="hljs-attr">PASSWORD_DB</span>=<span class="hljs-string">"Contraseña del usuario"</span>
+</code></pre>
+    <p>Una vez hecho este paso, su servidor deberá conectarse correctamente a la base de datos configurada en el <a
+            href="#server-configjson">archivo de configuracion</a>.</p>
+    <h3 id="server-config-json">Server-config.json</h3>
+    <p>En este archivo se definen las configuraciones del servidor.</p>
+    <p>Es posible ejecutar el servidor sin tener que modificar las configuración por defecto, sin embargo, aquí está la
+        lista de configuraciones y su descripción:</p>
+    <ol>
+        <li>
+            <p><code>application_version</code>: La versión del servidor, la que se imprime por consola al momento de
+                ejecutar <code>npm start</code> o <code>npm run dev</code>. No se pretende que sea modificado por usted.
+            </p>
+        </li>
+        <li>
+            <p><code>default_port</code>: Puerto utilizado para levantar el servidor. Se puede asignar el valor 0 para
+                levantar el servidor en un puerto efímero, en caso de no saber qué puertos tienes disponibles.</p>
+        </li>
+        <li>
+            <p><code>internal_resources_route</code>: La ruta de acceso para obtener los archivos privados declarado en
+                <code>internal_resources_folder</code>.
+            </p>
+        </li>
+        <li>
+            <p><code>internal_resources_folder</code>: Nombre de la carpeta que se desea exponer para almacenar
+                contenido de
+                uso interno del servidor. Su punto de acceso se define en <code>internal_resources_route</code>.</p>
+        </li>
+        <li>
+            <p><code>external_resources_route</code>: La ruta de acceso para obtener los archivos público declarado en
+                <code>internal_resources_folder</code>.
+            </p>
+        </li>
+        <li>
+            <p><code>external_resources_folder</code>: Nombre de la carpeta que se desea hacer público para almacenar
+                contenido de los usuarios y del frontend. Su punto de acceso se define en
+                <code>external_resources_route</code>.
+            </p>
+        </li>
+        <li>
+            <p><code>database_name</code>: Nombre de la base de datos que se usará para la creación de la tabla y
+                almacenar
+                información.</p>
+        </li>
+        <li>
+            <p><code>database_host</code>: DNS o IP dónde se hospeda la base de datos del proyecto.</p>
+        </li>
+        <li>
+            <p><code>database_port</code>: Puerto de servicion MySQL del servidor, por defecto y convención 3306.</p>
+        </li>
+    </ol>
+</div>
