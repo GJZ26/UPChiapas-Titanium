@@ -1,6 +1,6 @@
 import express from "express";
 import '../services/StudentServices.js'
 
-const StudentRoutes = express.Router()
+const StudentRouter = express.Router()
 
-export default StudentRoutes;
+export default StudentRouter;
