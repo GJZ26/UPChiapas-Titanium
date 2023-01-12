@@ -2,7 +2,7 @@
 <!-- 
 Si concideran pertinente y necesario, actualicen y corrijan este documento :)
  -->
-**Documentación para la versión** ^0.0.1-dev
+**Documentación para la versión** 1.0.0-dev
 
 Bienvenido al Server Side de **Titanium**.
 
