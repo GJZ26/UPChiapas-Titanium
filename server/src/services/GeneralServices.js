@@ -1,4 +1,4 @@
-import config from '../server-config.json' assert {type: "json"}
+import config from "../utilities/Yaml.js"
 
 export const home = (req, res) => {
     if (req.headers['user-agent'].includes("Mozilla")){
@@ -8,6 +8,6 @@ export const home = (req, res) => {
     res.json({
         message: "Bievenidos a la API de UP Titanium",
         documentation: `http://${config.database_host}:${config.default_port}/doc`,
-        version:config.application_version,
+        version:config.application.version,
     })
 }

@@ -1,6 +1,5 @@
 import express from 'express'
 import DocRouter from './routes/DocRouter.js';
-import config from './server-config.json' assert {type: 'json'}
 import { log } from './utilities/BeautyLogs.js';
 import favicon from 'serve-favicon'
 import CareerRouter from './routes/CareerRouter.js';
@@ -10,19 +9,20 @@ import SubjectRouter from './routes/SubjectRouter.js';
 import TeacherRouter from './routes/TeacherRouter.js';
 import GeneralRouter from './routes/GeneralRouter.js';
 import StudentRouter from './routes/StudentRouter.js';
+import config from './utilities/Yaml.js'
 
 // Aplicativo
 const app = express();
 
 // Configuración
-const port = config.default_port
-const version = config.application_version
+const port = config.application.port
+const version = config.application.version
 
-const internalRoute = config.internal_resources_route
-const internalFolder = config.internal_resources_folder
+const internalRoute = config.internal_resources.path
+const internalFolder = config.internal_resources.folder
 
-const externalRoute = config.external_resources_route
-const externalFolder = config.external_resources_folder
+const externalRoute = config.external_resources.path
+const externalFolder = config.external_resources.folder
 
 // Configuración del server
 app.use(favicon(`${process.cwd()}/src/resources/images/favicon.jpg`))
