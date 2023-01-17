@@ -1,43 +1,64 @@
 # Up Titanium - Server
+
 <!-- 
-Si concideran pertinente y necesario, actualicen y corrijan este documento :)
+    Cualquier contribución se agradece
  -->
-**Documentación para la versión** 0.0.1-dev (Desactualizado)
 
-Bienvenido al Server Side de **Titanium**.
+**Documentación para la versión** 2.0.0-dev
 
-Antes de comenzar, configura tus variables de entorno, aprende cómo hacerlo [aquí](#env).
+Bienvenido al **Server Side de Titanium**.
 
-Para ejecutar el proyecto, abra su terminal, asegurate de estar en la carpeta `/server` (al mismo nivel de este archivo).
+Inicio Rápido
+---
 
-Puedes verificar esto con el comando `pwd`.
+Estos son los recursos necesarios para levantar y/o modificar los archivos que hacen funcionar el backend del proyecto de Titanium.
 
-Instala las dependencias necesarias con `npm install`.
+**Antes de comenzar**: Este proyecto funciona con **Node Js**, recuerda tener instalado la versión más nueva para ejecutar el proyecto.
 
-Ejecute `npm start` para levantar el servidor o `npm run dev` para arrancar el mismo servidor con nodemon.
+**Nota**: Este proyecto usa base de datos **MySQL** para almacenar información, asegúrate de tener instalados y en ejecución todos los servicios necesarios antes de arrancar el servidor. Te recomendamos crear una base de datos dedicada para el proyecto.
 
-En caso de no tener instalado nodemon, ejecute `npm install -g nodemon`
+Para ejecutar el proyecto:
+* Abra una nueva terminal es este directorio, asegurate de estar en la carpeta `/server` (al mismo nivel de este archivo). Puedes verificar esto con el comando `pwd`.
+
+* Instala las dependencias necesarias con `npm install`.
+
+* Cree un archivo **.env** para almacenar las credenciales para acceder a tu base de datos, mira cómo hacerlo [aquí](#env)
+
+* Ejecute `npm start` para levantar el servidor o `npm run dev` para arrancar el mismo servidor con nodemon.
+
+**Nota**: En caso de no tener instalado nodemon, ejecute `npm install -g nodemon`
 
 ## Contenido
 1. [Directorios](#directorios)
     1. [Connections](#connections)
-    2. [Models](#models)
-    3. [Public](#public)
-    4. [Resources](#resources)
-    5. [Routes](#routes)
-    6. [Services](#services)
+    2. [Documentation](#documentation)
+    3. [Models](#models)
+    4. [Public](#public)
+    5. [Resources](#resources)
+    6. [Routes](#routes)
+    7. [Services](#services)
+    8. [Utilities](#utilities)
 2. [Archivos](#archivos)
     1. [Server.js](#serverjs)
     2. [.env](#env)
-    3. [Server-config.json](#server-configjson)
+    3. [Server-config.yml](#server-configyml)
+        1. [application](#application)
+        2. [database](#database)
+        3. [internal_resources](#internal_resources)
+        4. [external_resources](#external_resources)
+
+---
 
 ## Directorios
 Los directorios están distribuidos de la siguiente forma para su mejor escalabilidad, mantenimiento y depuración.
 
-En esta sección te describiremos qué almacena cada directorio.
+En esta sección te describiremos qué almacena cada directorio dentro de la carpeta `src/`.
 
 ### Connections/
-Guarga el script que hacen conexión a la base datos especificada en el [archivo de configuración](#server-configjson).
+Guarga el script que hacen conexión a la base datos especificada en el [archivo de configuración](#server-configyml).
+
+### Documentation/
+Almacena los archivo **html** que se muestran en la ruta de documentación del servidor
 
 ### Models/
 Contiene los scripts que definen las entidades que se almacenarán en la base de datos.
@@ -45,14 +66,14 @@ Contiene los scripts que definen las entidades que se almacenarán en la base de
 ### Public/
 En este directorio se almacenará la información pública de los usuarios o contenidos multimedia. 
 
-Los archivos de este directorio se puede acceder a través de la ruta `http://localhost:port/content/` desde cualquier cliente.
+Por defecto, los archivos de este directorio se puede acceder a través de la ruta `http://localhost:port/content/` desde cualquier cliente.
 
-Se puede cambiar el nombre de la carpeta que se desea hacer pública y la ruta de acceso desde el [archivo de configuración](#server-configjson) con la opción `external_resources_route` y/o `external_resources_path`.
+Se puede cambiar el nombre de la carpeta que se desea hacer pública y la ruta de acceso desde el [archivo de configuración](#server-configyml) con la opción `external_resources_route` y/o `external_resources_path`.
 
 ### Resources/
 En este directorio se almacenan contenido que se usará dentro del servidor, como hoja de estilos, scripts, iconos, etcétera.
 
-Se podrá acceder mediante la ruta `http://localhost:port/server-files/` y al igual que el directorio [public/](#public), se puede cambiar el nombre de la carpeta que se desea hacer pública y la ruta de acceso desde el [archivo de configuración](#server-configjson) con la opción `internal_resources_route` y/o `internal_resources_path`.
+Por defecto, se podrá acceder mediante la ruta `http://localhost:port/server-files/` y al igual que el directorio [public/](#public), se puede cambiar el nombre de la carpeta que se desea hacer pública y la ruta de acceso desde el [archivo de configuración](#server-configyml) con la opción `internal_resources_route` y/o `internal_resources_path`.
 
 ### Routes/
 En esta carpeta se hallan los scripts que definen las rutas que tendrán los [servicios](#services).
@@ -60,12 +81,20 @@ En esta carpeta se hallan los scripts que definen las rutas que tendrán los [se
 ### Services/
 En este directiorios viven los scripts que tratan y sirven la información consultada.
 
+### Utilities/
+Aquí se alojan los módulos que se usan en más de un servicio o dentro del mismo [**Server.js**](#serverjs).
+
+Puede contener script importantes para funcionar, como módulos de lecturas de configuración, u otros más estéticos, como estilizado de impresiones por consola.
+
+---
+
 ## Archivos
 La mayor parte de los scripts poseen documentación para explicar qué hacen y cómo usarlos. 
 
 Sin embargo hay archivos adicionales que son igual importantes y se deben dar una descripción de su funcionamento más detallado.
 ### Server.js
-Este es el archivo principal del servidor, importa los enrutadores, inicializa el servidor y lo configura de acuerdo a tu preferencia. Por sentido común, **NINGÚN** parche debería aplicarse acá.
+Este es el archivo principal del servidor, importa los enrutadores, inicializa el servidor y lo configura de acuerdo a tu preferencia. Se pretende que este archivo no sea modificado con regularidad.
+
 ### .env
 Los archivos **.env** son usados para definir variables de entorno del servidor, por defecto (y por seguridad) no se indexan en git.
 
@@ -76,25 +105,75 @@ El archivo **.env** deberá tener el siguiente contenido:
 USER_DB="Usuario de tu base de datos"
 PASSWORD_DB="Contraseña del usuario"
 ~~~
-Una vez hecho este paso, su servidor deberá conectarse correctamente a la base de datos configurada en el [archivo de configuracion](#server-configjson).
-### Server-config.json
-En este archivo se definen las configuraciones del servidor.
+Una vez hecho este paso, su servidor deberá conectarse correctamente a la base de datos configurada en el [archivo de configuracion](#server-configyml).
 
-Es posible ejecutar el servidor sin tener que modificar las configuración por defecto, sin embargo, aquí está la lista de configuraciones y su descripción:
-1. `application_version`: La versión del servidor, la que se imprime por consola al momento de ejecutar `npm start` o `npm run dev`. No se pretende que sea modificado por usted.
+### server-config.yml
+En este archivo se definen las configuraciones del servidor, como nombre de la base de datos, carpeta públicas, etc.
 
-2. `default_port`: Puerto utilizado para levantar el servidor. Se puede asignar el valor 0 para levantar el servidor en un puerto efímero, en caso de no saber qué puertos tienes disponibles.
+Este archivo está dividido por secciones que lucen así:
+```yml
+seccion:
+  configuración1: algo
+  configuración2: otro algo
 
-3. `internal_resources_route`: La ruta de acceso para obtener los archivos privados declarado en `internal_resources_folder`.
+seccion2:
+  configuración1: algo
+  configuración2: otro algo
+```
 
-4. `internal_resources_folder`: Nombre de la carpeta que se desea exponer para almacenar contenido de uso interno del servidor. Su punto de acceso se define en `internal_resources_route`.
+Cada sección contiene las configuraciones necesarias para algo en específico.
 
-5. `external_resources_route`:  La ruta de acceso para obtener los archivos público declarado en `internal_resources_folder`.
+#### **application**
+Esta sección configura las características básicas del programa
 
-6. `external_resources_folder`: Nombre de la carpeta que se desea hacer público para almacenar contenido de los usuarios y del frontend. Su punto de acceso se define en `external_resources_route`.
+```yml
+application:
+  version: 2.0.0-dev
+  port: 3000
+```
 
-7. `database_name`: Nombre de la base de datos que se usará para la creación de la tabla y almacenar información.
+**Configuraciones**:
+* **version**: Número de versión del proyecto, la misma que se imprime por consola al momento de iniciar el proyecto y al hacer una petición al home de la aplicación.
+* **port**: Puerto dónde se levantará el proyecto, en caso de no saber que puerto tienes disponibles, se puede asignar el número 0 para usar un puerto efímero (Experimental, puede ocasionar fallas en algunas rutas).
 
-8. `database_host`: DNS  o IP dónde se hospeda la base de datos del proyecto.
 
-9. `database_port`: Puerto de servicion MySQL del servidor, por defecto y convención 3306.
+#### **database**
+Esta sección configura la base de datos que usará el proyecto para almacenar la información
+
+```yml
+database:
+  name: titanium
+  host: localhost
+  port: 3306
+```
+
+**Configuraciones**:
+* **name**: Nombre de la base de datos dónde se crearán las tablas necesarias para el funcionamiento del proyecto. Esta base de datos debe ser creada manualmente antes de configurarla en este documento.
+* **host**: Host o IP donde se aloja tu base de datos, en caso se trabajar en un entorno local, no es necesario modificar esta configuración
+* **port**: Puerto donde se está ejecutando el servicio de MySQL, por defecto, viene montado en el puerto 3306, en caso de tenerlo en otro puerto, puedes modificarlo en esta configuración
+
+#### **internal_resources**
+Esta sección configura las carpetas que se usarán para exponer recursos internos del servidor, como archivos css, js, hmtml, íconos, etc.
+
+```yml
+internal_resources:
+  folder: resources
+  path: internal
+```
+
+**Configuraciones**:
+* **folder**: Carpeta dentro del directorio `src/` que será expuesta
+* **path**: Ruta por donde se accederá a los recursos expuestos, ej. `http://localhost:port/path`
+
+#### **external_resources**
+Esta sección configura las carpetas que se usarán para exponer recursos de los usuarios, como fotos de perfil, fotos de publicaciones, etc.
+
+```yml
+external_resources:
+  folder: resources
+  path: internal
+```
+
+**Configuraciones**:
+* **folder**: Carpeta dentro del directorio `src/` que será expuesta
+* **path**: Ruta por donde se accederá a los recursos expuestos, ej. `http://localhost:port/path`
