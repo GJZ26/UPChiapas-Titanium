@@ -1,0 +1,16 @@
+application:
+  version: 2.0.0-dev
+  port: 3000
+
+database:
+  name: titanium
+  host: localhost
+  port: 3306
+
+internal_resources:
+  folder: resources
+  path: internal
+
+external_resources:
+  folder: public
+  path: content
