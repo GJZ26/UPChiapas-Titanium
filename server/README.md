@@ -68,12 +68,12 @@ En este directorio se almacenará la información pública de los usuarios o con
 
 Por defecto, los archivos de este directorio se puede acceder a través de la ruta `http://localhost:port/content/` desde cualquier cliente.
 
-Se puede cambiar el nombre de la carpeta que se desea hacer pública y la ruta de acceso desde el [archivo de configuración](#server-configyml) con la opción `external_resources_route` y/o `external_resources_path`.
+Se puede cambiar el nombre de la carpeta que se desea hacer pública y la ruta de acceso desde el [archivo de configuración](#server-configyml) en la opción `path` y `folder` de la sección [`external_resources`](#external_resources).
 
 ### Resources/
-En este directorio se almacenan contenido que se usará dentro del servidor, como hoja de estilos, scripts, iconos, etcétera.
+En este directorio se almacenan contenido que se usará dentro del servidor, como hoja de estilos, scripts, íconos, etcétera.
 
-Por defecto, se podrá acceder mediante la ruta `http://localhost:port/server-files/` y al igual que el directorio [public/](#public), se puede cambiar el nombre de la carpeta que se desea hacer pública y la ruta de acceso desde el [archivo de configuración](#server-configyml) con la opción `internal_resources_route` y/o `internal_resources_path`.
+Por defecto, se podrá acceder mediante la ruta `http://localhost:port/internal/` y al igual que el directorio [public/](#public), se puede cambiar el nombre de la carpeta que desea hacer pública y la ruta de acceso desde el [archivo de configuración](#server-configyml) en la opción `path` y `folder` de la sección [`internal_resources`](#internal_resources).
 
 ### Routes/
 En esta carpeta se hallan los scripts que definen las rutas que tendrán los [servicios](#services).
@@ -153,7 +153,7 @@ database:
 * **port**: Puerto donde se está ejecutando el servicio de MySQL, por defecto, viene montado en el puerto 3306, en caso de tenerlo en otro puerto, puedes modificarlo en esta configuración
 
 #### **internal_resources**
-Esta sección configura las carpetas que se usarán para exponer recursos internos del servidor, como archivos css, js, hmtml, íconos, etc.
+Esta sección configura las carpetas que se usarán para exponer recursos internos del servidor, como archivos css, js, html, íconos, etc.
 
 ```yml
 internal_resources:
