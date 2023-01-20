@@ -4,7 +4,7 @@
     Cualquier contribución se agradece
  -->
 
-**Documentación para la versión** 2.0.0-dev
+**Documentación para la versión** 2.1.0-dev
 
 Bienvenido al **Server Side de Titanium**.
 
@@ -27,6 +27,9 @@ Para ejecutar el proyecto:
 * Ejecute `npm start` para levantar el servidor o `npm run dev` para arrancar el mismo servidor con nodemon.
 
 **Nota**: En caso de no tener instalado nodemon, ejecute `npm install -g nodemon`
+
+**Nota**: El script Server.js recibe un argumento, que permite imprimir los Query de Sequelize. 
+Use `node src/Server.js dev` para mostrar los query o `node src/Server.js` para ocultarlo.
 
 ## Contenido
 1. [Directorios](#directorios)
